@@ -1,6 +1,6 @@
 <?php
 
-function dd($value)
+function dd($value) //Dump and Die function -> takes a variable and dumps it on the page so I can see the data inside.
 {
     echo "<pre>";
     var_dump($value);
@@ -10,5 +10,5 @@ function dd($value)
 }
 
 function urlIs($value){
-    return $_SERVER['REQUEST_URI'] === $value;
+    return $_SERVER['REQUEST_URI'] === $value ;
 }

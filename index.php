@@ -1,8 +1,7 @@
 <?php
 
 require 'functions.php';
+require 'Database.php'; //Database needs to load before router
+require 'router.php';
 
-$heading = "Home";
-
-require "views/index.view.php";
 

@@ -6,21 +6,15 @@ $db = new Database($config['database']);
 $heading = 'Note';
 $currentUserId = 1;
 
-$note = $db->query(
-    'select * from notes where id = :id', /* track the note that has am id 
-that matches the one in the query string : http://navigation.test/note?id=2*/
+ /* track the note that has am id that matches the one in the query string : http://navigation.test/note?id=2*/
+$note = $db->query('select * from notes where id = :id',
     [
         'id' => $_GET['id']
     ]
-)->fetch();
+)->findOrFail();
 
-if (!$note) { //when asking for a non existent id => 404 not found
-    abort();
-}
+//if the notes where not made from current user => 403 forbidden
 
-
-if ($note['user_id'] !== $currentUserId) { //if the notes where not made from current user => 403 forbidden
-    abort(Response::FORBIDDEN);
-}
+authorize($note['user_id'] === $currentUserId);
 
 require "views/note.view.php";

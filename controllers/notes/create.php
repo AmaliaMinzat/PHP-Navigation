@@ -1,17 +1,17 @@
 <?php
 
-require 'Validator.php';
+use Core\Database;
+use Core\Validator;
 
-$config = require('config.php');
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
-$heading = 'Create Note';
+$errors = [];
 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $errors = [];
 
     //$validator = new Validator(); if the function is static this line can be removed and called inline bellow
 
@@ -29,5 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 }
+view("notes/create.view.php", [
+    'heading' => 'Create Note',
+    'errors' => $errors
+]);
 
-require 'views/note-create.view.php';

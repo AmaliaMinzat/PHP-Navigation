@@ -24,3 +24,4 @@ view("notes/show.view.php", [
     'heading' => 'Note',
     'note' => $note
 ]);
+
